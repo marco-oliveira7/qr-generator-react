@@ -1,23 +1,21 @@
 import { useState } from "react";
 
 function App() {
+  const [word, setWord] = useState("");
   const [img, setImg] = useState("");
-  const [download, setDownload] = useState(
-    "https://api.qrserver.com/v1/create-qr-code/?size=288x288&data=ok"
-  );
 
   function generateQR() {
-    const word = document.querySelector("#word");
-    if (word.value === "") {
-      word.style.border = "1px solid red";
+    const input = document.querySelector("#word");
+    if (input.value === "") {
+      input.style.border = "1px solid red";
     } else {
-      word.style.border = "";
+      input.style.border = "";
       const code = document.querySelector(".code");
       code.style.height = "376px";
       code.style.opacity = "1";
 
       setImg(
-        `https://api.qrserver.com/v1/create-qr-code/?size=288x288&data=${word.value}`
+        `https://api.qrserver.com/v1/create-qr-code/?size=288x288&data=${word}`
       );
     }
   }
@@ -30,6 +28,7 @@ function App() {
           id="word"
           placeholder="type the URL here"
           className="bg-gray-300 text-black mr-4 px-2 py-1 rounded-md"
+          onChange={(e) => setWord(e.target.value)}
         />
         <button
           className="bg-blue-800 text-white rounded-lg px-2 py-1"
